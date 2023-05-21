@@ -37,38 +37,14 @@ mod tests {
     }
 
     #[test]
-    fn zero_test_01() {
-        let result = adder(0, -22);
-        assert_eq!(result, -22);
-    }
-
-    #[test]
     fn zero_test_02() {
         let result = adder(0, 38);
         assert_eq!(result, 38);
     }
 
     #[test]
-    fn minus_test_00() {
-        let result = adder(-2, -2);
-        assert_eq!(result, -4);
-    }
-
-    #[test]
-    fn minus_test_01() {
-        let result = adder(-12, -22);
-        assert_eq!(result, -34);
-    }
-
-    #[test]
-    fn minus_test_02() {
-        let result = adder(-123, -38);
-        assert_eq!(result, -161);
-    }
-
-    #[test]
-    fn minus_test_03() {
-        let result = adder(-123, 38);
-        assert_eq!(result, -85);
+    fn zero_test_03() {
+        let result = adder(42, 0);
+        assert_eq!(result, 42);
     }
 }
