@@ -1,9 +1,9 @@
 mod librsb;
 
-use librsb::adder;
+use librsb::*;
 
 #[cfg(test)]
-mod tests {
+mod adder_tests {
     use super::*;
 
     #[test]
@@ -46,5 +46,16 @@ mod tests {
     fn zero_test_03() {
         let result = adder(42, 0);
         assert_eq!(result, 42);
+    }
+}
+
+#[cfg(test)]
+mod multiplier_tests {
+    use super::*;
+    
+    #[test]
+    fn times_test_00() {
+        let result = multiplier(2, 2);
+        assert_eq!(result, 4);
     }
 }

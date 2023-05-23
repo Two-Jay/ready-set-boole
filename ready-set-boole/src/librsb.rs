@@ -8,3 +8,10 @@ pub fn adder(left: u32, right:u32) -> u32 {
     }
     tmp_left
 }
+
+pub fn multiplier(left: u32, right:u32) -> u32 {
+    let mut tmp_left = left;
+    let mut tmp_right = right;
+    let mut result = 0;
+    result
+}
