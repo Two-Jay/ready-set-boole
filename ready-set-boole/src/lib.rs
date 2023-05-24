@@ -106,4 +106,82 @@ mod multiplier_tests {
 
 
 
+#[cfg(test)]
+mod gray_code_test {
+    use super::*;
+
+    #[test]
+    fn gray_testcase_00() {
+        let param : u32 = 0;
+        let answer : u32 = 0;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_01() {
+        let param : u32 = 1;
+        let answer : u32 = 1;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_02() {
+        let param : u32 = 2;
+        let answer : u32 = 3;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_03() {
+        let param : u32 = 3;
+        let answer : u32 = 2;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_04() {
+        let param : u32 = 4;
+        let answer : u32 = 6;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_05() {
+        let param : u32 = 5;
+        let answer : u32 = 7;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_06() {
+        let param : u32 = 6;
+        let answer : u32 = 5;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_07() {
+        let param : u32 = 7;
+        let answer : u32 = 4;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+
+    #[test]
+    fn gray_testcase_08() {
+        let param : u32 = 8;
+        let answer : u32 = 8;
+        let result: u32 = gray_code(param);
+        assert_eq!(result, answer)
+    }
+}
+
+
 

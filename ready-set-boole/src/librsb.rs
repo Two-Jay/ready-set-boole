@@ -22,3 +22,9 @@ pub fn multiplier(left: u32, right:u32) -> u32 {
     }
     result
 }
+
+pub fn gray_code(n : u32) -> u32 {
+    let mut result = 0;
+    result += 1;
+    result
+}
