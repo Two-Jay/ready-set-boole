@@ -171,15 +171,15 @@ mod gray_code_test {
         let param : u32 = 7;
         let answer : u32 = 4;
         let result: u32 = gray_code(param);
-        assert_eq!(result, answer)
+        assert_eq!(result, answer);
     }
 
     #[test]
     fn gray_testcase_08() {
         let param : u32 = 8;
-        let answer : u32 = 8;
+        let answer : u32 = 12;
         let result: u32 = gray_code(param);
-        assert_eq!(result, answer)
+        assert_eq!(result, answer);
     }
 }
 
