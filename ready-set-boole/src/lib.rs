@@ -1,6 +1,12 @@
-mod librsb;
+mod adder;
+mod multiplier;
+mod graycode;
+mod eval_formula;
 
-use librsb::*;
+use adder::*;
+use multiplier::*;
+use graycode::*;
+use eval_formula::*;
 
 #[cfg(test)]
 mod adder_tests {
@@ -189,7 +195,7 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_00() {
-        let param : str = "10&";
+        let param : &str = "10&";
         let answer : bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
@@ -197,7 +203,7 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_01() {
-        let param : str = "10|";
+        let param : &str = "10|";
         let answer : bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
@@ -205,7 +211,7 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_02() {
-        let param : str = "11>";
+        let param : &str = "11>";
         let answer : bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
@@ -213,15 +219,15 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_03() {
-        let param : str = "10=";
+        let param : &str = "10=";
         let answer : bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
-    fn formula_testcase_03() {
-        let param : str = "1011||=";
+    fn formula_testcase_04() {
+        let param : &str = "1011||=";
         let answer : bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
