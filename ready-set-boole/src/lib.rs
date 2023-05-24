@@ -183,5 +183,47 @@ mod gray_code_test {
     }
 }
 
+#[cfg(test)]
+mod eval_formula_test {
+    use super::*;
 
+    #[test]
+    fn formula_testcase_00() {
+        let param : str = "10&";
+        let answer : bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
 
+    #[test]
+    fn formula_testcase_01() {
+        let param : str = "10|";
+        let answer : bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_02() {
+        let param : str = "11>";
+        let answer : bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_03() {
+        let param : str = "10=";
+        let answer : bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_03() {
+        let param : str = "1011||=";
+        let answer : bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+}

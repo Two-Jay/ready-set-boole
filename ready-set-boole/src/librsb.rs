@@ -27,3 +27,7 @@ pub fn gray_code(n : u32) -> u32 {
     let mut result = n ^ (n >> 1);
     result
 }
+
+pub fn eval_formula(formula : &str) -> bool {
+    return true
+}
