@@ -55,7 +55,55 @@ mod multiplier_tests {
     
     #[test]
     fn times_test_00() {
-        let result = multiplier(2, 2);
-        assert_eq!(result, 4);
+        let a : u32 = 2;
+        let b : u32 = 2;
+        let result = multiplier(a,b);
+        assert_eq!(result, a*b);
+    }
+
+    #[test]
+    fn times_test_01() {
+        let a : u32 = 42;
+        let b : u32 = 4;
+        let result = multiplier(a,b);
+        assert_eq!(result, a*b);
+    }
+
+    #[test]
+    fn times_test_02() {
+        let a : u32 = 5;
+        let b : u32 = 83;
+        let result = multiplier(a,b);
+        assert_eq!(result, a*b);
+    }
+
+    #[test]
+    fn times_test_03() {
+        let a : u32 = 293;
+        let b : u32 = 32921;
+        let result = multiplier(a,b);
+        assert_eq!(result, a*b);
+    }
+
+    #[test]
+    fn times_test_04() {
+        let a : u32 = 283931903;
+        let b : u32 = 0;
+        let result = multiplier(a,b);
+        assert_eq!(result, a*b);
+    }
+    
+    #[test]
+    fn times_test_gugudan() {
+        for a in 1..10 {
+            for b in 1..10 {
+                let result = multiplier(a,b);
+                assert_eq!(result, a*b);   
+            }
+        }
     }
 }
+
+
+
+
