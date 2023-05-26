@@ -28,6 +28,16 @@ fn init_state_behavior(behaviors : &mut Vec<fn(&mut VecDeque<i8>) -> Option<f64>
     behaviors.push(get_true);
 }
 
+fn conjunction(vd : &mut VecDeque<i8>) -> Option<f64> {
+    // validate : is vd's len more than 2;
+    let a : i8 = vd.pop_back().unwrap();
+    let b : i8 = vd.pop_back().unwrap();
+    let result = if a & b == 1 {1} else {0};
+    vd.push_front(result);
+    None
+}
+
+
 pub fn eval_formula(_formula : &str) -> bool {
     let mut stored : VecDeque<i8> = VecDeque::new();
     let mut state_behaviors : Vec<fn(&mut VecDeque<i8>) -> Option<f64>> = Vec::new();
@@ -42,6 +52,8 @@ pub fn eval_formula(_formula : &str) -> bool {
             state_behaviors[1](&mut stored);
         } else if value == '!' {
             switch_negation_flag(&mut _negation_flag);
+        } else if value == '&' {
+
         }
     }
     return true;
