@@ -232,4 +232,21 @@ mod eval_formula_test {
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
+
+    #[test]
+    fn formula_testcase_05() {
+        let param : &str = "!10&";
+        let answer : bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+
+    #[test]
+    fn formula_testcase_06() {
+        let param : &str = "1!0&";
+        let answer : bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
 }

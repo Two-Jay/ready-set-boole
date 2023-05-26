@@ -26,6 +26,7 @@ fn switch_negation_flag(flag : &mut bool) -> Option<f64> {
 fn init_state_behavior(behaviors : &mut Vec<fn(&mut VecDeque<i8>) -> Option<f64>>) {
     behaviors.push(get_false);
     behaviors.push(get_true);
+    behaviors.push(conjunction);
 }
 
 fn conjunction(vd : &mut VecDeque<i8>) -> Option<f64> {
@@ -36,7 +37,6 @@ fn conjunction(vd : &mut VecDeque<i8>) -> Option<f64> {
     vd.push_front(result);
     None
 }
-
 
 pub fn eval_formula(_formula : &str) -> bool {
     let mut stored : VecDeque<i8> = VecDeque::new();
@@ -53,8 +53,9 @@ pub fn eval_formula(_formula : &str) -> bool {
         } else if value == '!' {
             switch_negation_flag(&mut _negation_flag);
         } else if value == '&' {
-
+            state_behaviors[2](&mut stored);
         }
     }
-    return true;
+    let result : bool = if *stored.get(0).unwrap() == 1 as i8 { true } else { false };
+    return result;
 }
