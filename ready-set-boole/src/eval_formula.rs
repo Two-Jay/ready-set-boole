@@ -1,21 +1,21 @@
 use std::collections::VecDeque;
 
+fn condition_get_false(value: &char, negation_flag: &bool) -> bool {
+    return (*value == '1' && *negation_flag == true) || (*value == '0' && *negation_flag == false);
+}
+
 fn get_false(vd: &mut VecDeque<i8>) -> Option<f64> {
     vd.push_back(0);
     None
 }
 
+fn condition_get_true(value: &char, negation_flag: &bool) -> bool {
+    return (*value == '0' && *negation_flag == true) || (*value == '1' && *negation_flag == false);
+}
+
 fn get_true(vd: &mut VecDeque<i8>) -> Option<f64> {
     vd.push_back(1);
     None
-}
-
-fn condition_get_true(value: &char, negation_flag: &bool) -> bool {
-    return *value == '1' || (*value == '0' && *negation_flag == true);
-}
-
-fn condition_get_false(value: &char, negation_flag: &bool) -> bool {
-    return *value == '0' || (*value == '1' && *negation_flag == true);
 }
 
 fn switch_negation_flag(flag: &mut bool) -> Option<f64> {
@@ -60,16 +60,26 @@ pub fn eval_formula(_formula: &str) -> bool {
     init_state_behavior(&mut state_behaviors);
     let values = _formula.chars();
     for value in values {
+        // println!("{}...........", value);
         if condition_get_false(&value, &_negation_flag) {
             state_behaviors[0](&mut stored);
+            if _negation_flag == true {
+                switch_negation_flag(&mut _negation_flag);
+            }
+            // println!("false value inserted");
         } else if condition_get_true(&value, &_negation_flag) {
             state_behaviors[1](&mut stored);
+            if _negation_flag == true {
+                switch_negation_flag(&mut _negation_flag);
+            }
+            // println!("false value inserted");
         } else if value == '!' {
             switch_negation_flag(&mut _negation_flag);
         } else if value == '&' {
             state_behaviors[2](&mut stored);
         }
-        print_vd(&mut stored);
+        // print_vd(&mut stored);
+        // println!("======")
     }
     return *stored.get(0).unwrap() == 1;
 }
