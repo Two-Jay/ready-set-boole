@@ -27,6 +27,8 @@ fn init_state_behavior(behaviors: &mut Vec<fn(&mut VecDeque<i8>) -> Option<f64>>
     behaviors.push(get_false);
     behaviors.push(get_true);
     behaviors.push(conjunction);
+    behaviors.push(disjunction);
+    behaviors.push(exclusive_disjunction);
 }
 
 fn conjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
@@ -36,6 +38,28 @@ fn conjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
     let a: i8 = vd.pop_back().unwrap();
     let b: i8 = vd.pop_back().unwrap();
     let result = if a & b == 1 { 1 } else { 0 };
+    vd.push_front(result);
+    None
+}
+
+fn disjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
+    if vd.len() < 2 {
+        return None;
+    }
+    let a: i8 = vd.pop_back().unwrap();
+    let b: i8 = vd.pop_back().unwrap();
+    let result = if a == 1 || b == 1 { 1 } else { 0 };
+    vd.push_front(result);
+    None
+}
+
+fn exclusive_disjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
+    if vd.len() < 2 {
+        return None;
+    }
+    let a: i8 = vd.pop_back().unwrap();
+    let b: i8 = vd.pop_back().unwrap();
+    let result = if a != b { 1 } else { 0 };
     vd.push_front(result);
     None
 }
@@ -77,6 +101,10 @@ pub fn eval_formula(_formula: &str) -> bool {
             switch_negation_flag(&mut _negation_flag);
         } else if value == '&' {
             state_behaviors[2](&mut stored);
+        } else if value == '|' {
+            state_behaviors[3](&mut stored);
+        } else if value == '^' {
+            state_behaviors[4](&mut stored);
         }
         // print_vd(&mut stored);
         // println!("======")

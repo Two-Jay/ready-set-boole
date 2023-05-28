@@ -192,7 +192,7 @@ mod eval_formula_test {
     use super::*;
 
     #[test]
-    fn formula_testcase_00() {
+    fn formula_testcase_subjectcase_00() {
         let param: &str = "10&";
         let answer: bool = false;
         let result: bool = eval_formula(param);
@@ -200,7 +200,7 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_01() {
+    fn formula_testcase_subjectcase_01() {
         let param: &str = "10|";
         let answer: bool = true;
         let result: bool = eval_formula(param);
@@ -208,7 +208,7 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_02() {
+    fn formula_testcase_subjectcase_02() {
         let param: &str = "11>";
         let answer: bool = true;
         let result: bool = eval_formula(param);
@@ -216,7 +216,7 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_03() {
+    fn formula_testcase_subjectcase_03() {
         let param: &str = "10=";
         let answer: bool = false;
         let result: bool = eval_formula(param);
@@ -224,7 +224,7 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_04() {
+    fn formula_testcase_subjectcase_04() {
         let param: &str = "1011||=";
         let answer: bool = true;
         let result: bool = eval_formula(param);
@@ -232,7 +232,7 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_05() {
+    fn formula_testcase_conjunction_00() {
         let param: &str = "!10&";
         let answer: bool = false;
         let result: bool = eval_formula(param);
@@ -240,9 +240,73 @@ mod eval_formula_test {
     }
 
     #[test]
-    fn formula_testcase_06() {
+    fn formula_testcase_conjunction_01() {
         let param: &str = "1!0&";
         let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_00() {
+        let param: &str = "10|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_01() {
+        let param: &str = "11|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_02() {
+        let param: &str = "01|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_03() {
+        let param: &str = "00|";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_04() {
+        let param: &str = "!00|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_05() {
+        let param: &str = "0!0|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_06() {
+        let param: &str = "1!1|";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_disjunction_07() {
+        let param: &str = "!10|";
+        let answer: bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
