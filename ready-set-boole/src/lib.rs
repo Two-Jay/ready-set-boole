@@ -1,12 +1,12 @@
 mod adder;
-mod multiplier;
-mod graycode;
 mod eval_formula;
+mod graycode;
+mod multiplier;
 
-use adder::*;
-use multiplier::*;
-use graycode::*;
-use eval_formula::*;
+use adder::adder;
+use eval_formula::eval_formula;
+use graycode::gray_code;
+use multiplier::multiplier;
 
 #[cfg(test)]
 mod adder_tests {
@@ -58,59 +58,57 @@ mod adder_tests {
 #[cfg(test)]
 mod multiplier_tests {
     use super::*;
-    
+
     #[test]
     fn times_test_00() {
-        let a : u32 = 2;
-        let b : u32 = 2;
-        let result = multiplier(a,b);
-        assert_eq!(result, a*b);
+        let a: u32 = 2;
+        let b: u32 = 2;
+        let result = multiplier(a, b);
+        assert_eq!(result, a * b);
     }
 
     #[test]
     fn times_test_01() {
-        let a : u32 = 42;
-        let b : u32 = 4;
-        let result = multiplier(a,b);
-        assert_eq!(result, a*b);
+        let a: u32 = 42;
+        let b: u32 = 4;
+        let result = multiplier(a, b);
+        assert_eq!(result, a * b);
     }
 
     #[test]
     fn times_test_02() {
-        let a : u32 = 5;
-        let b : u32 = 83;
-        let result = multiplier(a,b);
-        assert_eq!(result, a*b);
+        let a: u32 = 5;
+        let b: u32 = 83;
+        let result = multiplier(a, b);
+        assert_eq!(result, a * b);
     }
 
     #[test]
     fn times_test_03() {
-        let a : u32 = 293;
-        let b : u32 = 32921;
-        let result = multiplier(a,b);
-        assert_eq!(result, a*b);
+        let a: u32 = 293;
+        let b: u32 = 32921;
+        let result = multiplier(a, b);
+        assert_eq!(result, a * b);
     }
 
     #[test]
     fn times_test_04() {
-        let a : u32 = 283931903;
-        let b : u32 = 0;
-        let result = multiplier(a,b);
-        assert_eq!(result, a*b);
+        let a: u32 = 283931903;
+        let b: u32 = 0;
+        let result = multiplier(a, b);
+        assert_eq!(result, a * b);
     }
-    
+
     #[test]
     fn times_test_gugudan() {
         for a in 1..10 {
             for b in 1..10 {
-                let result = multiplier(a,b);
-                assert_eq!(result, a*b);   
+                let result = multiplier(a, b);
+                assert_eq!(result, a * b);
             }
         }
     }
 }
-
-
 
 #[cfg(test)]
 mod gray_code_test {
@@ -118,72 +116,72 @@ mod gray_code_test {
 
     #[test]
     fn gray_testcase_00() {
-        let param : u32 = 0;
-        let answer : u32 = 0;
+        let param: u32 = 0;
+        let answer: u32 = 0;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_01() {
-        let param : u32 = 1;
-        let answer : u32 = 1;
+        let param: u32 = 1;
+        let answer: u32 = 1;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_02() {
-        let param : u32 = 2;
-        let answer : u32 = 3;
+        let param: u32 = 2;
+        let answer: u32 = 3;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_03() {
-        let param : u32 = 3;
-        let answer : u32 = 2;
+        let param: u32 = 3;
+        let answer: u32 = 2;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_04() {
-        let param : u32 = 4;
-        let answer : u32 = 6;
+        let param: u32 = 4;
+        let answer: u32 = 6;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_05() {
-        let param : u32 = 5;
-        let answer : u32 = 7;
+        let param: u32 = 5;
+        let answer: u32 = 7;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_06() {
-        let param : u32 = 6;
-        let answer : u32 = 5;
+        let param: u32 = 6;
+        let answer: u32 = 5;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer)
     }
 
     #[test]
     fn gray_testcase_07() {
-        let param : u32 = 7;
-        let answer : u32 = 4;
+        let param: u32 = 7;
+        let answer: u32 = 4;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn gray_testcase_08() {
-        let param : u32 = 8;
-        let answer : u32 = 12;
+        let param: u32 = 8;
+        let answer: u32 = 12;
         let result: u32 = gray_code(param);
         assert_eq!(result, answer);
     }
@@ -195,57 +193,56 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_00() {
-        let param : &str = "10&";
-        let answer : bool = false;
+        let param: &str = "10&";
+        let answer: bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_01() {
-        let param : &str = "10|";
-        let answer : bool = true;
+        let param: &str = "10|";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_02() {
-        let param : &str = "11>";
-        let answer : bool = true;
+        let param: &str = "11>";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_03() {
-        let param : &str = "10=";
-        let answer : bool = false;
+        let param: &str = "10=";
+        let answer: bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_04() {
-        let param : &str = "1011||=";
-        let answer : bool = true;
+        let param: &str = "1011||=";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_05() {
-        let param : &str = "!10&";
-        let answer : bool = false;
+        let param: &str = "!10&";
+        let answer: bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
-
     #[test]
     fn formula_testcase_06() {
-        let param : &str = "1!0&";
-        let answer : bool = true;
+        let param: &str = "1!0&";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
