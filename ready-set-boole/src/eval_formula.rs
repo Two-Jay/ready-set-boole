@@ -29,6 +29,8 @@ fn init_state_behavior(behaviors: &mut Vec<fn(&mut VecDeque<i8>) -> Option<f64>>
     behaviors.push(conjunction);
     behaviors.push(disjunction);
     behaviors.push(exclusive_disjunction);
+    behaviors.push(material_condition);
+    behaviors.push(logical_equivalence);
 }
 
 fn conjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
@@ -64,6 +66,28 @@ fn exclusive_disjunction(vd: &mut VecDeque<i8>) -> Option<f64> {
     None
 }
 
+fn material_condition(vd: &mut VecDeque<i8>) -> Option<f64> {
+    if vd.len() < 2 {
+        return None;
+    }
+    let a: i8 = vd.pop_back().unwrap();
+    let b: i8 = vd.pop_back().unwrap();
+    let result = if !(b == 1 && a == 0) { 1 } else { 0 };
+    vd.push_front(result);
+    None
+}
+
+fn logical_equivalence(vd: &mut VecDeque<i8>) -> Option<f64> {
+    if vd.len() < 2 {
+        return None;
+    }
+    let a: i8 = vd.pop_back().unwrap();
+    let b: i8 = vd.pop_back().unwrap();
+    let result = if a == b { 1 } else { 0 };
+    vd.push_front(result);
+    None
+}
+
 fn print_vd(vd: &mut VecDeque<i8>) -> Option<f64> {
     print!("vd state : [");
     for i in 0..vd.len() {
@@ -76,6 +100,37 @@ fn print_vd(vd: &mut VecDeque<i8>) -> Option<f64> {
     None
 }
 
+fn run_behavior_by_state(
+    stored: &mut VecDeque<i8>,
+    behaviors: &mut Vec<fn(&mut VecDeque<i8>) -> Option<f64>>,
+    negation_flag: &mut bool,
+    value: char,
+) {
+    if condition_get_false(&value, &negation_flag) {
+        behaviors[0](stored);
+        if negation_flag == &true {
+            switch_negation_flag(negation_flag);
+        }
+    } else if condition_get_true(&value, &negation_flag) {
+        behaviors[1](stored);
+        if negation_flag == &true {
+            switch_negation_flag(negation_flag);
+        }
+    } else if value == '!' {
+        switch_negation_flag(negation_flag);
+    } else if value == '&' {
+        behaviors[2](stored);
+    } else if value == '|' {
+        behaviors[3](stored);
+    } else if value == '^' {
+        behaviors[4](stored);
+    } else if value == '>' {
+        behaviors[5](stored);
+    } else if value == '=' {
+        behaviors[6](stored);
+    }
+}
+
 pub fn eval_formula(_formula: &str) -> bool {
     let mut stored: VecDeque<i8> = VecDeque::new();
     let mut state_behaviors: Vec<fn(&mut VecDeque<i8>) -> Option<f64>> = Vec::new();
@@ -84,30 +139,13 @@ pub fn eval_formula(_formula: &str) -> bool {
     init_state_behavior(&mut state_behaviors);
     let values = _formula.chars();
     for value in values {
-        // println!("{}...........", value);
-        if condition_get_false(&value, &_negation_flag) {
-            state_behaviors[0](&mut stored);
-            if _negation_flag == true {
-                switch_negation_flag(&mut _negation_flag);
-            }
-            // println!("false value inserted");
-        } else if condition_get_true(&value, &_negation_flag) {
-            state_behaviors[1](&mut stored);
-            if _negation_flag == true {
-                switch_negation_flag(&mut _negation_flag);
-            }
-            // println!("false value inserted");
-        } else if value == '!' {
-            switch_negation_flag(&mut _negation_flag);
-        } else if value == '&' {
-            state_behaviors[2](&mut stored);
-        } else if value == '|' {
-            state_behaviors[3](&mut stored);
-        } else if value == '^' {
-            state_behaviors[4](&mut stored);
-        }
+        run_behavior_by_state(
+            &mut stored,
+            &mut state_behaviors,
+            &mut _negation_flag,
+            value,
+        );
         // print_vd(&mut stored);
-        // println!("======")
     }
     return *stored.get(0).unwrap() == 1;
 }

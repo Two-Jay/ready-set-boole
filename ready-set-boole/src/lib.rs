@@ -233,16 +233,32 @@ mod eval_formula_test {
 
     #[test]
     fn formula_testcase_conjunction_00() {
-        let param: &str = "!10&";
-        let answer: bool = false;
+        let param: &str = "11&";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
 
     #[test]
     fn formula_testcase_conjunction_01() {
-        let param: &str = "1!0&";
-        let answer: bool = true;
+        let param: &str = "01&";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_conjunction_02() {
+        let param: &str = "10&";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_conjunction_03() {
+        let param: &str = "00&";
+        let answer: bool = false;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
@@ -307,6 +323,102 @@ mod eval_formula_test {
     fn formula_testcase_disjunction_07() {
         let param: &str = "!10|";
         let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_exclusive_disjunction_00() {
+        let param: &str = "11^";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_exclusive_disjunction_01() {
+        let param: &str = "10^";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_exclusive_disjunction_02() {
+        let param: &str = "01^";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_exclusive_disjunction_03() {
+        let param: &str = "00^";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_material_condition_00() {
+        let param: &str = "11>";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_material_condition_01() {
+        let param: &str = "10>";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_material_condition_02() {
+        let param: &str = "01>";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_material_condition_03() {
+        let param: &str = "00>";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_logical_equivalence_00() {
+        let param: &str = "11=";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_logical_equivalence_01() {
+        let param: &str = "01=";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_logical_equivalence_02() {
+        let param: &str = "10=";
+        let answer: bool = false;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
+
+    #[test]
+    fn formula_testcase_logical_equivalence_03() {
+        let param: &str = "00=";
+        let answer: bool = true;
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
