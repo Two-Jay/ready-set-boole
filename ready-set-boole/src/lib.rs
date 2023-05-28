@@ -422,4 +422,12 @@ mod eval_formula_test {
         let result: bool = eval_formula(param);
         assert_eq!(result, answer);
     }
+
+    #[test]
+    fn formula_testcase_complex_00() {
+        let param: &str = "1101=^&";
+        let answer: bool = true;
+        let result: bool = eval_formula(param);
+        assert_eq!(result, answer);
+    }
 }

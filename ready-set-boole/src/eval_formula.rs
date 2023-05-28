@@ -5,7 +5,7 @@ fn condition_get_false(value: &char, negation_flag: &bool) -> bool {
 }
 
 fn get_false(vd: &mut VecDeque<i8>) -> Option<f64> {
-    vd.push_back(0);
+    vd.push_front(0);
     None
 }
 
@@ -14,7 +14,7 @@ fn condition_get_true(value: &char, negation_flag: &bool) -> bool {
 }
 
 fn get_true(vd: &mut VecDeque<i8>) -> Option<f64> {
-    vd.push_back(1);
+    vd.push_front(1);
     None
 }
 
@@ -72,7 +72,7 @@ fn material_condition(vd: &mut VecDeque<i8>) -> Option<f64> {
     }
     let a: i8 = vd.pop_back().unwrap();
     let b: i8 = vd.pop_back().unwrap();
-    let result = if !(b == 1 && a == 0) { 1 } else { 0 };
+    let result = if !(a == 1 && b == 0) { 1 } else { 0 };
     vd.push_front(result);
     None
 }
@@ -145,7 +145,7 @@ pub fn eval_formula(_formula: &str) -> bool {
             &mut _negation_flag,
             value,
         );
-        // print_vd(&mut stored);
+        print_vd(&mut stored);
     }
     return *stored.get(0).unwrap() == 1;
 }
